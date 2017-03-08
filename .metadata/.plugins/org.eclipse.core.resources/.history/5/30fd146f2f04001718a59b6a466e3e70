@@ -19,9 +19,6 @@ public class Spreadsheet implements Grid
 	@Override
 	public String processCommand(String command)
 	{
-		inspect(command);
-		
-		
 		// TODO Auto-generated method stub
 		return command;
 	}
@@ -50,29 +47,8 @@ public class Spreadsheet implements Grid
 	@Override
 	public String getGridText()
 	{
-		
-		
-		
-		
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public String inspect(String comm){
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }
