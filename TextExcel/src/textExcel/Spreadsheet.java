@@ -2,10 +2,11 @@ package textExcel;
 
 // Update this file with your own code.
 
-public class Spreadsheet implements Grid
-{
+public class Spreadsheet implements Grid{
+
+	private Cell[][] spreadsheet= new Cell [20][12];
 	public Spreadsheet(){
-		Cell[][] spreadsheet= new Cell [20][12];
+		
 		for(int i = 0; i< spreadsheet.length; i++){
 			for(int j = 0; j<spreadsheet[j].length; j++){
 				spreadsheet[i][j]= new EmptyCell();
@@ -50,6 +51,18 @@ public class Spreadsheet implements Grid
 	@Override
 	public String getGridText()
 	{
+		String header= "   |";
+		for(int col=0; col< 11; col++){
+			
+			
+		}
+		
+		
+		
+		
+		
+		
+	}
 		
 		
 		
