@@ -20,13 +20,24 @@ public class Spreadsheet implements Grid{
 	@Override
 	public String processCommand(String command)
 	{
-		inspect(command);
+		if(command.equals("")){
+			return "";
+		}
 		
 		
 		// TODO Auto-generated method stub
 		return command;
 	}
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	@Override
 	public int getRows()
 	{
@@ -34,6 +45,14 @@ public class Spreadsheet implements Grid{
 		return 20;
 	}
 
+	public void clearSheet(){
+		for(int i = 0; i < 20; i++){
+			for(int j = 0; j < 12; j++){
+				spreadsheet[i][j] = new EmptyCell();
+			}
+		}
+	}
+	
 	@Override
 	public int getCols()
 	{
@@ -44,8 +63,8 @@ public class Spreadsheet implements Grid{
 	@Override
 	public Cell getCell(Location loc)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return spreadsheet[loc.getRow()][loc.getCol()];
+		
 	}
 
 	@Override
@@ -53,25 +72,34 @@ public class Spreadsheet implements Grid{
 	{
 		String header= "   |";
 		for(int col=0; col< 11; col++){
-			
-			
+			header += (char) (col + 'A') + "         |";
 		}
+			
+		for(int i = 1; i <= getRows(); i++){
+			header= header + "\n";
+			if(i < 10){
+				header= header + i + "  |";
+			}else{
+				header= header + i + " |";
+			}
+			for(int j = 0; j < 12; j++){
+				header= header + spreadsheet[i-1][j].abbreviatedCellText() + "|";
+			}
+		}
+		header= header + "\n";
+		return header;
+	
+	
 		
 		
 		
 		
-		
-		
-	}
-		
-		
-		
-		
-		// TODO Auto-generated method stub
-		return null;
+	
 	}
 
-	public String inspect(String comm){
+	public String inspect(String name){
+		
+	}
 	
 	
 	
