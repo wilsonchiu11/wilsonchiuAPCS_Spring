@@ -4,9 +4,9 @@ package textExcel;
 
 public class Spreadsheet implements Grid{
 
-	Cell[][]spreadsheet=new Cell[getRows()][getCols()];
+	Cell[][]spreadsheet;
 	public Spreadsheet(){
-		
+		spreadsheet= new Cell[getRows()][getCols()];
 		for(int i = 0; i< spreadsheet.length; i++){
 			for(int j = 0; j<spreadsheet[j].length; j++){
 				spreadsheet[i][j]= new EmptyCell();
@@ -24,11 +24,9 @@ public class Spreadsheet implements Grid{
 		
 		String[] arr= command.split(" ");
 		 
-		if(command.equals("")){
-			return command;
-		}
+
 		if(arr.length==0){
-			return command;
+			return "";
 		}
 		
 		else if(command.equalsIgnoreCase("clear")){ 
@@ -75,12 +73,15 @@ public class Spreadsheet implements Grid{
 			SpreadsheetLocation loc = new SpreadsheetLocation(command);
 			return spreadsheet[loc.getRow()][loc.getCol()].fullCellText();
 		}
-		return command;
+		return "";
 	}
 	
 	
 	
 	
+	public void setCell(SpreadsheetLocation loc, Cell value) {
+		spreadsheet[loc.getRow()][loc.getCol()] = value;
+	}
 	
 	
 	
@@ -119,7 +120,26 @@ public class Spreadsheet implements Grid{
 	@Override
 	public String getGridText()
 	{
-		
+		/*
+		String header= "   |";
+		for(int col=0; col< 11; col++){
+			header += (char) (col + 'A') + "         |";
+		}
+			
+		for(int i = 1; i <= getRows(); i++){
+			header= header + "\n";
+			if(i < 10){
+				header= header + i + "  |";
+			}else{
+				header= header + i + " |";
+			}
+			for(int j = 0; j < 12; j++){
+				header= header + spreadsheet[i-1][j].abbreviatedCellText() + "|";
+			}
+		}
+		header= header + "\n";
+		return header;
+		*/
 		
 			String grid = "   |";
 			for(int i=0; i < getCols(); i++){

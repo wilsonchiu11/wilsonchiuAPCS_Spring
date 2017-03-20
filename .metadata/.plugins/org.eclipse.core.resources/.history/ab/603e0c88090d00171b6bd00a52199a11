@@ -4,9 +4,9 @@ package textExcel;
 
 public class Spreadsheet implements Grid{
 
-	Cell[][]spreadsheet=new Cell[getRows()][getCols()];
+	Cell[][]spreadsheet;
 	public Spreadsheet(){
-		
+		spreadsheet= new Cell[getRows()][getCols()];
 		for(int i = 0; i< spreadsheet.length; i++){
 			for(int j = 0; j<spreadsheet[j].length; j++){
 				spreadsheet[i][j]= new EmptyCell();
@@ -24,11 +24,9 @@ public class Spreadsheet implements Grid{
 		
 		String[] arr= command.split(" ");
 		 
-		if(command.equals("")){
-			return command;
-		}
+
 		if(arr.length==0){
-			return command;
+			return "";
 		}
 		
 		else if(command.equalsIgnoreCase("clear")){ 
@@ -75,12 +73,15 @@ public class Spreadsheet implements Grid{
 			SpreadsheetLocation loc = new SpreadsheetLocation(command);
 			return spreadsheet[loc.getRow()][loc.getCol()].fullCellText();
 		}
-		return command;
+		return "";
 	}
 	
 	
 	
 	
+	public void setCell(SpreadsheetLocation loc, Cell value) {
+		spreadsheet[loc.getRow()][loc.getCol()] = value;
+	}
 	
 	
 	

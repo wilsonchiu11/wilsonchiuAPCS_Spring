@@ -24,9 +24,7 @@ public class Spreadsheet implements Grid{
 		
 		String[] arr= command.split(" ");
 		 
-		if(command.equals("")){
-			return command;
-		}
+		
 		if(arr.length==0){
 			return command;
 		}

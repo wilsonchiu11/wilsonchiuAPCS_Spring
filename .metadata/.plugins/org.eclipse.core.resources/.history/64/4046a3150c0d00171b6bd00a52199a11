@@ -13,7 +13,7 @@ public class SpreadsheetLocation implements Location
     {
         // TODO Auto-generated method stub
         
-    	return this.row;
+    	return this.row-1;
     }
 
     @Override

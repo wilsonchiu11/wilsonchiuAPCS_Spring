@@ -10,15 +10,14 @@ public class TextExcel
 
 	public static void main(String[] args)
 	{
-		
 		Spreadsheet spreadsheet = new Spreadsheet();
-		Scanner input = new Scanner(System.in);
-		String command = "";
-		while(command.equals("quit") != true){
-			System.out.println("What do you want to do?");
-			command = input.nextLine();
-			System.out.println(spreadsheet.processCommand(command));
-		}
+	    Scanner userInput  = new Scanner (System.in);
+	    String input = userInput.nextLine();
+	    while(!input.equals ("quit")) {
+	    	input = spreadsheet.processCommand(userInput.next());
+	    		System.out.println(input);
+	    }
+		
 		
 		
 		
