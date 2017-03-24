@@ -5,11 +5,11 @@ public abstract class RealCell implements Cell {
 	private int length;
 	
 	public RealCell(String command){
-		text= command;
+		String input= command;
 		
 	}
 	public double getDoubleValue(){
-		return Double.parseDouble(text);
+		return 0.0;
 	}
 	
 	

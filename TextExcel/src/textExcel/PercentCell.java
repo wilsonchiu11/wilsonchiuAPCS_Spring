@@ -2,8 +2,10 @@ package textExcel;
 
 public class PercentCell extends RealCell {
 
-	public PercentCell() {
-		// TODO Auto-generated constructor stub
+	public PercentCell(String input) {
+		super(input);
 	}
-
+	public double getDoubleValue(){
+		
+	}
 }
