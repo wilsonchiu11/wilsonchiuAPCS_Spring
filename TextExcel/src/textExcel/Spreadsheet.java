@@ -58,11 +58,28 @@ public class Spreadsheet implements Grid{
 		}
 		else if(arr.length==1){
 			SpreadsheetLocation locspect= new SpreadsheetLocation(command);
-			return spreadsheet[locspect.getRow()][locspect.getCol()].fullCellText();
-			
-			
+			return spreadsheet[locspect.getRow()][locspect.getCol()].fullCellText();	
 		}
-		
+		else if(arr[1].equals ("=")){
+			SpreadsheetLocation location= new SpreadsheetLocation(arr[0]);
+			if(arr[2].contains("%")){
+				PercentCell percentCell = new PercentCell(arr[2]);
+				spreadsheet[location.getRow()+1][location.getCol()+1]= percentCell;
+			}	
+			else if(arr[2].contains("(")){
+				FormulaCell formulaCell= new FormulaCell(arr[2]);
+				spreadsheet[location.getRow()][location.getCol()]= formulaCell;
+			}
+			else{
+				ValueCell valueCell = new ValueCell(arr[2]);
+				spreadsheet[location.getRow()][location.getCol()]= valueCell;
+			}
+			return getGridText();	
+				
+				
+				
+				
+		}
 		
 		else if(command.equalsIgnoreCase("clear ")){
 			String loca = arr[1];
@@ -75,6 +92,7 @@ public class Spreadsheet implements Grid{
 			SpreadsheetLocation loc = new SpreadsheetLocation(command);
 			return spreadsheet[loc.getRow()][loc.getCol()].fullCellText();
 		}
+		
 		return command;
 	}
 	

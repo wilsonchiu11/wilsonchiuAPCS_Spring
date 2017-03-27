@@ -12,9 +12,7 @@ public abstract class RealCell implements Cell {
 		return Double.parseDouble(text);
 	}
 	
-	public String getContents(){
-		return text;
-	}
+	
 	@Override
 	public String abbreviatedCellText() {
 		return (text + "          ").substring(0, 10);

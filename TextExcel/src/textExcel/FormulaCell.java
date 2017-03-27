@@ -2,8 +2,10 @@ package textExcel;
 
 public class FormulaCell extends RealCell {
 
-	public FormulaCell() {
-		// TODO Auto-generated constructor stub
+	public FormulaCell(String input) {
+		super(input);
 	}
-
+	public double getDoubleValue(){
+		return 0.0;
+	}
 }
