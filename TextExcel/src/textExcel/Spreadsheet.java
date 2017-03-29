@@ -18,87 +18,7 @@ public class Spreadsheet implements Grid{
 		
 	}
 	@Override
-/*
-	public String processCommand(String command)
-	{
-		
-		
-		String[] arr= command.split(" ");
-		 
-		if(command.equals("")){
-			return command;
-		}
-		
-		else if(command.equalsIgnoreCase("clear")){ 
-			clearSheet();
-			return getGridText();
-		}
-		else if(arr.length==2){
-			String loc= arr[1];
-			SpreadsheetLocation loc1 = new SpreadsheetLocation(loc);
-			spreadsheet[loc1.getRow()][loc1.getCol()]= new EmptyCell();
-			return getGridText();
-			
-		}
-		
-		else if(command.contains("\"")){
-			String[] split = command.split(" = ");
-			String loc= split[0];
-			String input= split[1];
-			SpreadsheetLocation loc1 = new SpreadsheetLocation(loc);
-			
-			if(split.length >= 3){
-				System.out.println(input += " = " + split[2]);
-			}
-			spreadsheet[loc1.getRow()][loc1.getCol()] = new TextCell(input.substring(1, input.length()-1));
-			return getGridText();
-			
-		}
-		
-		
-		else if(arr[1].equals ("=")){
-			SpreadsheetLocation location= new SpreadsheetLocation(arr[0]);
-			if(arr[2].substring(arr[2].length()-1).equals("%")){
-				PercentCell percentCell = new PercentCell(arr[2].trim());
-				spreadsheet[location.getRow()][location.getCol()]= percentCell;
-			}	
-			else if(arr[2].charAt(0) == 34){
-				TextCell textCell = new TextCell(arr[2].trim());
-				spreadsheet[location.getRow()][location.getCol()]= textCell;
-				
-			}
-			else if(arr[2].charAt(0) == ('(')){
-				FormulaCell formulaCell= new FormulaCell(arr[2].trim());
-				spreadsheet[location.getRow()][location.getCol()]= formulaCell;
-			}
-			else{
-				ValueCell valueCell = new ValueCell(arr[2].trim());
-				spreadsheet[location.getRow()][location.getCol()]= valueCell;
-			}
-			return getGridText();	
-		}		
-		else if(arr.length==1){
-				SpreadsheetLocation locspect= new SpreadsheetLocation(command);
-				return spreadsheet[locspect.getRow()][locspect.getCol()].fullCellText();			
-				
-				
-		}
-		
-		else if(command.equalsIgnoreCase("clear ")){
-			String loca = arr[1];
-			SpreadsheetLocation location= new SpreadsheetLocation(loca);
-			spreadsheet[location.getRow()][location.getCol()]=new EmptyCell();
-			
-			return getGridText();
-		}	
-		else if(arr.length<=3){
-			SpreadsheetLocation loc = new SpreadsheetLocation(command);
-			return spreadsheet[loc.getRow()][loc.getCol()].fullCellText();
-		}
-		
-		return command;
-	}
-*/
+
 
 	
 	public String processCommand(String command)
@@ -140,10 +60,17 @@ public class Spreadsheet implements Grid{
 			    	return getGridText(); 
 			    	
 				}	
-				else if(splitSpace[1].equals("=")){
+				
+				
+				else if (splitSpace.length==1){
+					
+					SpreadsheetLocation loc = new SpreadsheetLocation(command);
+					return spreadsheet[loc.getRow()][loc.getCol()].fullCellText();
+				}
+				else{
 					SpreadsheetLocation loc=new SpreadsheetLocation(splitSpace[0]);
 					
-					if (splitSpace[2].charAt(0) == 34){ 
+					if (splitSpace[2].charAt(0)==34){ 
 						spreadsheet [loc.getRow()] [loc.getCol()] = new TextCell (splitSpace[2]);
 					}
 					
@@ -161,11 +88,6 @@ public class Spreadsheet implements Grid{
 					
 					return getGridText();
 				} 	
-				else {
-					SpreadsheetLocation loc = new SpreadsheetLocation(command);
-					return spreadsheet[loc.getRow()][loc.getCol()].fullCellText();
-				}
-		
 	}
 	
 	

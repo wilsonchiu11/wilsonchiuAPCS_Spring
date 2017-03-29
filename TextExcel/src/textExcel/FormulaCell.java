@@ -3,7 +3,7 @@ package textExcel;
 public class FormulaCell extends RealCell {
 
 	public double getDoubleValue(){
-		return 0.0;				//for part A just return anything
+		return 0.0;				
 	}
 	public FormulaCell(String cellText){
 		super(cellText);
