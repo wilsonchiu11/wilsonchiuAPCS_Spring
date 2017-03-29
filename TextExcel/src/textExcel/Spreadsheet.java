@@ -18,6 +18,7 @@ public class Spreadsheet implements Grid{
 		
 	}
 	@Override
+/*
 	public String processCommand(String command)
 	{
 		
@@ -25,9 +26,6 @@ public class Spreadsheet implements Grid{
 		String[] arr= command.split(" ");
 		 
 		if(command.equals("")){
-			return command;
-		}
-		if(arr.length==0){
 			return command;
 		}
 		
@@ -56,27 +54,32 @@ public class Spreadsheet implements Grid{
 			return getGridText();
 			
 		}
-		else if(arr.length==1){
-			SpreadsheetLocation locspect= new SpreadsheetLocation(command);
-			return spreadsheet[locspect.getRow()][locspect.getCol()].fullCellText();	
-		}
+		
+		
 		else if(arr[1].equals ("=")){
 			SpreadsheetLocation location= new SpreadsheetLocation(arr[0]);
-			if(arr[2].contains("%")){
-				PercentCell percentCell = new PercentCell(arr[2]);
-				spreadsheet[location.getRow()+1][location.getCol()+1]= percentCell;
+			if(arr[2].substring(arr[2].length()-1).equals("%")){
+				PercentCell percentCell = new PercentCell(arr[2].trim());
+				spreadsheet[location.getRow()][location.getCol()]= percentCell;
 			}	
-			else if(arr[2].contains("(")){
-				FormulaCell formulaCell= new FormulaCell(arr[2]);
+			else if(arr[2].charAt(0) == 34){
+				TextCell textCell = new TextCell(arr[2].trim());
+				spreadsheet[location.getRow()][location.getCol()]= textCell;
+				
+			}
+			else if(arr[2].charAt(0) == ('(')){
+				FormulaCell formulaCell= new FormulaCell(arr[2].trim());
 				spreadsheet[location.getRow()][location.getCol()]= formulaCell;
 			}
 			else{
-				ValueCell valueCell = new ValueCell(arr[2]);
+				ValueCell valueCell = new ValueCell(arr[2].trim());
 				spreadsheet[location.getRow()][location.getCol()]= valueCell;
 			}
 			return getGridText();	
-				
-				
+		}		
+		else if(arr.length==1){
+				SpreadsheetLocation locspect= new SpreadsheetLocation(command);
+				return spreadsheet[locspect.getRow()][locspect.getCol()].fullCellText();			
 				
 				
 		}
@@ -95,9 +98,75 @@ public class Spreadsheet implements Grid{
 		
 		return command;
 	}
+*/
+
 	
-	
-	
+	public String processCommand(String command)
+	{
+		
+				String[] splitSpace = command.split(" ");
+				
+				
+				if(command.equals("")){
+					return command;
+				}
+			
+				else if(command.toLowerCase().equals("clear")){ 
+					for(int i = 0; i < getRows(); i++){
+						for(int j = 0; j < getCols(); j++){
+							spreadsheet[i][j] = new EmptyCell();
+						}
+					}
+					return getGridText();	
+				}
+				
+				else if(splitSpace.length == 2){
+					String location = splitSpace[1];
+					SpreadsheetLocation loc = new SpreadsheetLocation(location);
+					spreadsheet[loc.getRow()][loc.getCol()] = new EmptyCell();
+					return getGridText();
+				}
+				
+				else if(command.contains("\"")){  
+					String[] split = command.split(" = ");
+					String location = split[0];
+					String value = split[1];
+					
+					if(split.length >= 3){
+						System.out.println(value = value + " = " + split[2]);
+					}
+					SpreadsheetLocation loc = new SpreadsheetLocation(location);
+					spreadsheet[loc.getRow()][loc.getCol()] = new TextCell(value.substring(1, value.length()-1)); 
+			    	return getGridText(); 
+			    	
+				}	
+				else if(splitSpace[1].equals("=")){
+					SpreadsheetLocation loc=new SpreadsheetLocation(splitSpace[0]);
+					
+					if (splitSpace[2].charAt(0) == 34){ 
+						spreadsheet [loc.getRow()] [loc.getCol()] = new TextCell (splitSpace[2]);
+					}
+					
+					else if (splitSpace[2].substring(splitSpace[2].length()-1).equals("%")){ 
+						spreadsheet [loc.getRow()] [loc.getCol()] = new PercentCell (splitSpace[2]);	
+					}
+					
+					else if (splitSpace[2].charAt(0) == ('(')){ 
+						spreadsheet [loc.getRow()] [loc.getCol()] = new FormulaCell (splitSpace[2]);	
+					}
+					
+					else { 
+						spreadsheet [loc.getRow()] [loc.getCol()] = new ValueCell (splitSpace[2]);	
+					}
+					
+					return getGridText();
+				} 	
+				else {
+					SpreadsheetLocation loc = new SpreadsheetLocation(command);
+					return spreadsheet[loc.getRow()][loc.getCol()].fullCellText();
+				}
+		
+	}
 	
 	
 	

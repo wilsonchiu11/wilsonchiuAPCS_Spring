@@ -1,0 +1,27 @@
+package textExcel;
+
+public class PercentCell extends RealCell {
+
+	public PercentCell(String input) {
+		super(input);
+	}
+	public String abbreviatedCellText(){
+		String percent=getContents();
+		if(percent.length() < 10){
+			percent=percent.substring(0,percent.indexOf("."))+"%";
+			int difference = 10 - percent.length();
+			for(int i = 0; i < difference; i++){
+				percent += " ";
+			}
+		}
+		return percent.substring(0,10);
+	}
+	
+	public String fullCellText() {
+		return (getDoubleValue()/100.0) + "";					
+	}
+	public double getDoubleValue(){
+		String answer= getContents();
+		return (Double.parseDouble(answer.substring(0, answer.indexOf("%")))/100);
+	}
+}

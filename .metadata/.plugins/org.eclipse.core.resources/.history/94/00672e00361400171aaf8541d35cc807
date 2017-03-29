@@ -1,0 +1,187 @@
+package textExcel;
+
+// Update this file with your own code.
+
+public class Spreadsheet implements Grid{
+
+	Cell[][]spreadsheet=new Cell[getRows()][getCols()];
+	public Spreadsheet(){
+		
+		for(int i = 0; i< spreadsheet.length; i++){
+			for(int j = 0; j<spreadsheet[j].length; j++){
+				spreadsheet[i][j]= new EmptyCell();
+			}
+		}
+		
+		
+		
+		
+	}
+	@Override
+	public String processCommand(String command)
+	{
+		
+		
+		String[] arr= command.split(" ");
+		 
+		if(command.equals("")){
+			return command;
+		}
+		if(arr.length==0){
+			return command;
+		}
+		
+		else if(command.equalsIgnoreCase("clear")){ 
+			clearSheet();
+			return getGridText();
+		}
+		else if(arr.length==2){
+			String loc= arr[1];
+			SpreadsheetLocation loc1 = new SpreadsheetLocation(loc);
+			spreadsheet[loc1.getRow()][loc1.getCol()]= new EmptyCell();
+			return getGridText();
+			
+		}
+		
+		else if(command.contains("\"")){
+			String[] split = command.split(" = ");
+			String loc= split[0];
+			String input= split[1];
+			SpreadsheetLocation loc1 = new SpreadsheetLocation(loc);
+			
+			if(split.length >= 3){
+				System.out.println(input += " = " + split[2]);
+			}
+			spreadsheet[loc1.getRow()][loc1.getCol()] = new TextCell(input.substring(1, input.length()-1));
+			return getGridText();
+			
+		}
+		else if(arr.length==1){
+			SpreadsheetLocation locspect= new SpreadsheetLocation(command);
+			return spreadsheet[locspect.getRow()][locspect.getCol()].fullCellText();	
+		}
+		else if(arr[1].equals ("=")){
+			SpreadsheetLocation location= new SpreadsheetLocation(arr[0]);
+			if(arr[2].contains("%")){
+				PercentCell percentCell = new PercentCell(arr[2]);
+				spreadsheet[location.getRow()][location.getCol()]= percentCell;
+			}	
+			else if(arr[2].contains("(")){
+				FormulaCell formulaCell= new FormulaCell(arr[2]);
+				spreadsheet[location.getRow()][location.getCol()]= formulaCell;
+			}
+			else{
+				ValueCell valueCell = new ValueCell(arr[2]);
+				spreadsheet[location.getRow()][location.getCol()]= valueCell;
+			}
+			return getGridText();	
+				
+				
+				
+				
+		}
+		
+		else if(command.equalsIgnoreCase("clear ")){
+			String loca = arr[1];
+			SpreadsheetLocation location= new SpreadsheetLocation(loca);
+			spreadsheet[location.getRow()][location.getCol()]=new EmptyCell();
+			
+			return getGridText();
+		}	
+		else if(arr.length<=3){
+			SpreadsheetLocation loc = new SpreadsheetLocation(command);
+			return spreadsheet[loc.getRow()][loc.getCol()].fullCellText();
+		}
+		
+		return command;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	@Override
+	public int getRows()
+	{
+		// TODO Auto-generated method stub
+		return 20;
+	}
+
+	public void clearSheet(){
+		for(int i = 0; i < 20; i++){
+			for(int j = 0; j < 12; j++){
+				spreadsheet[i][j] = new EmptyCell();
+			}
+		}
+	}
+	
+	@Override
+	public int getCols()
+	{
+		// TODO Auto-generated method stub
+		return 12;
+	}
+
+	@Override
+	public Cell getCell(Location loc)
+	{
+		int row = loc.getRow();
+		int column = loc.getCol();
+		return spreadsheet[row][column];
+		
+	}
+
+	@Override
+	public String getGridText()
+	{
+		
+		
+			String grid = "   |";
+			for(int i=0; i < getCols(); i++){
+				grid += (char) (i + 'A') + "         |";
+			}
+			grid += "\n";
+		
+			for(int i=1; i <= getRows(); i++){
+				if(i > 9){
+					grid += i + " ";
+				}
+				if(i < 10){
+					grid += i + "  ";
+				}
+				for(int j=0; j < getCols(); j++){
+					grid += "|" + spreadsheet[i-1][j].abbreviatedCellText();
+				}
+				grid += "|\n";
+			}
+			return grid;
+		
+	
+		
+		
+		
+		
+	
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+}
