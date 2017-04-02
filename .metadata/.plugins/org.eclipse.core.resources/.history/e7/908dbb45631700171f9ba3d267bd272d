@@ -10,7 +10,7 @@ public class TextExcel
 
 	public static void main(String[] args)
 	{
-		
+		/*
 		Spreadsheet spreadsheet = new Spreadsheet();
 		Scanner input = new Scanner(System.in);
 		String command = "";
@@ -19,8 +19,14 @@ public class TextExcel
 			command = input.nextLine();
 			System.out.println(spreadsheet.processCommand(command));
 		}
-		
-		
+		*/
+		Scanner input = new Scanner(System.in);
+	    Spreadsheet sheet = new Spreadsheet();
+	    String userInput = input.nextLine();
+	    while(!userInput.equalsIgnoreCase("quit")){
+	    	System.out.println(sheet.processCommand(userInput));
+	    	userInput = input.nextLine();
+	    }
 		
 		
 	    // Add your command loop here
