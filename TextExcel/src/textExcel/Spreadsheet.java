@@ -4,7 +4,7 @@ package textExcel;
 
 public class Spreadsheet implements Grid{
 
-	Cell[][]spreadsheet=new Cell[getRows()][getCols()];
+	 Cell[][]spreadsheet=new Cell[getRows()][getCols()];
 	
 	public Spreadsheet(){
 		
