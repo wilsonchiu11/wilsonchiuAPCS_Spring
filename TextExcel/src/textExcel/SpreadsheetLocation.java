@@ -22,11 +22,7 @@ public class SpreadsheetLocation implements Location
     	return this.column;
     }
     public SpreadsheetLocation(String cellName){
-    	/*
-		row = Integer.parseInt(cellName.substring(1)) - 1;
-    	column = cellName.charAt(0);
-    	column = Character.toUpperCase(column) - 'A';
-    	*/
+    	
     	row = Integer.parseInt(cellName.substring(1)) - 1;
     	column = Character.toUpperCase(cellName.charAt(0)) - 65;
     }

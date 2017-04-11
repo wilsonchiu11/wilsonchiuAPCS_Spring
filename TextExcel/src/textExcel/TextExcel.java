@@ -15,7 +15,7 @@ public class TextExcel
 		Scanner input = new Scanner(System.in);
 		String command = "";
 		while(command.equals("quit") != true){
-			System.out.println("What do you want to do?");
+			System.out.println("What would you like to do?");
 			command = input.nextLine();
 			System.out.println(spreadsheet.processCommand(command));
 		}
