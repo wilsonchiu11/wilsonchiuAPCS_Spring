@@ -1,35 +1,16 @@
+
 package textExcel;
-
-public class ValueCell extends RealCell {
-	
-	String text=super.fullCellText();
-	double decimal=Double.parseDouble(text);
-	
-	
-	
+public class ValueCell extends RealCell{
+	private String value = "";
+	public ValueCell(String a){
+		value = a;
+		//stores string in parent class
+		setRealCell(a);
+	}
 	public double getDoubleValue(){
-		return decimal;
-	}
-	public ValueCell(String cellText){
-		super(cellText);
-	}
-	@Override
-	public String abbreviatedCellText() {
-		// TODO Auto-generated method stub
-		text=decimal+"";
-		if(text.indexOf(".")==-1){
-			text+=(".0");
-		}
-		
-		text+="            ";
-		return text.substring(0, 10);
-		
-		
+		//changes string to double
+		double placeHolder = Double.parseDouble(value);
+		return placeHolder;
 	}
 
-	@Override
-	public String fullCellText() {
-		// TODO Auto-generated method stub
-		return super.fullCellText();
-	}
 }
