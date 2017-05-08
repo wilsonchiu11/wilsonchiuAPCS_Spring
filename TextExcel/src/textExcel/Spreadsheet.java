@@ -1,7 +1,5 @@
 package textExcel;
 
-// Update this file with your own code.
-
 public class Spreadsheet implements Grid{
 
 	 Cell[][]spreadsheet=new Cell[getRows()][getCols()];
@@ -13,19 +11,14 @@ public class Spreadsheet implements Grid{
 				spreadsheet[i][j]= new EmptyCell();
 			}
 		}
-		
-		
-		
-		
 	}
 	@Override
 
-
-	
 	public String processCommand(String command)
 	{
 		
 		String[] splitCommand = command.split(" ");
+		
 		splitCommand[0] = splitCommand[0].toUpperCase();
 		if(command.length()==0){
 			return "";
@@ -33,7 +26,6 @@ public class Spreadsheet implements Grid{
 			String userInput = splitCommand[2] + "";
 			int counter = 3;
 			while(counter < splitCommand.length){
-				//adds the space that was taken out and the next part of the value
 				userInput += " " + splitCommand[counter];
 				counter++;
 			}
