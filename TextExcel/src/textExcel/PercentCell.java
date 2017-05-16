@@ -1,4 +1,4 @@
-
+   
 package textExcel;
 public class PercentCell extends RealCell{
 	private String input = "";

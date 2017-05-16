@@ -524,7 +524,7 @@ public class TestsALL
             String precise = "3.14159265358979";
             grid.processCommand("A2 = " + precise);
             Cell preciseCell = grid.getCell(new TestLocation(1, 0));
-            assertEquals("real precise cell length", 10, preciseCell.abbreviatedCellText().length());
+            assertEquals("real precise cell length", 10, preciseCell.abbreviatedCellText().length()); 
             assertEquals("real precise cell", Double.parseDouble(precise), Double.parseDouble(preciseCell.abbreviatedCellText()), 1e-6);
             assertEquals("real precise inspection ", Double.parseDouble(precise), Double.parseDouble(preciseCell.fullCellText()), 1e-6);
 
