@@ -135,7 +135,7 @@ public class Spreadsheet implements Grid{
 		spreadsheet[userInput.getRow()][userInput.getCol()] = new EmptyCell();
 	}
 	
-	
+}	
 	/*
 	
 	
@@ -203,7 +203,7 @@ public class Spreadsheet implements Grid{
 		
 	
 	}
-	
+	*/
 	
 	
 	
