@@ -9,7 +9,7 @@ public class TextExcel
 {
 
 	public static void main(String[] args){
-		//makes new spreadsheet object
+		//new spreadsheet object
 		Spreadsheet test = new Spreadsheet();
 		Scanner getUserInput = new Scanner(System.in);
 		String userInput = getUserInput.nextLine();

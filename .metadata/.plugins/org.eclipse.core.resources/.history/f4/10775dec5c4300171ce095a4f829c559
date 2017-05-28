@@ -98,7 +98,7 @@ public class FormulaCell extends RealCell{
 			return value;
 		}
 	}
-	public double sum(String beginning, String changedCell, String end){	
+public double sum(String beginning, String changedCell, String end){	
 		SpreadsheetLocation loc = new SpreadsheetLocation(changedCell);
 		//base case
 		if(changedCell.equals(end)){
