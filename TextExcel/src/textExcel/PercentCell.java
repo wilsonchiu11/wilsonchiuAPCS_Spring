@@ -9,7 +9,7 @@ public class PercentCell extends RealCell{
 		setRealCell(input);
 	}
 	public double getDoubleValue(){
-		//gets rid of percent sign and puts in decimal form
+		//put into decimal form
 		percent = Double.parseDouble(input.substring(0, input.length()-1))/100;
 		return percent;
 	}
