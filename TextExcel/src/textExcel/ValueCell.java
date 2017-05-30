@@ -8,7 +8,7 @@ public class ValueCell extends RealCell{
 		setRealCell(a);
 	}
 	public double getDoubleValue(){
-		//changes string to double
+		//turns string to double
 		double placeHolder = Double.parseDouble(value);
 		return placeHolder;
 	}

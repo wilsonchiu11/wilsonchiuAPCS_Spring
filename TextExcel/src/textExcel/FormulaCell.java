@@ -3,11 +3,11 @@ package textExcel;
 public class FormulaCell extends RealCell{
 	
 	private String value = "";
-	private Cell[][] wholeSpreadsheet;
+	private Cell[][] spreadsheet;
 	
 	public FormulaCell(String input, Cell[][] array){
 		value = input;
-		wholeSpreadsheet = array;
+		spreadsheet = array;
 		//stores string in parent class
 	}
 	
@@ -15,35 +15,37 @@ public class FormulaCell extends RealCell{
 		double sum = 0.0;
 		String noParenthesis = value.substring(2, value.length() - 2);
 		String[] changeValue = noParenthesis.split(" ");
+		
 		if(changeValue.length == 1){
 			return Double.parseDouble(changeValue[0]);
-			} else if(changeValue[0].toUpperCase().equals("AVG") || changeValue[0].toUpperCase().equals("SUM")){
-				//get the beginning cell and ending cell
-				int counter = 0;
-				String beginning = changeValue[1].toUpperCase().substring(0, changeValue[1].indexOf('-'));
-				String ending = changeValue[1].toUpperCase().substring(changeValue[1].indexOf('-') + 1);
-				if(changeValue[0].toUpperCase().equals("AVG")){
-					String placeHolder = beginning;
-					while(!(placeHolder.equals(ending))){
-						SpreadsheetLocation loc = new SpreadsheetLocation(placeHolder);
-						//change the column when its the same row
+			} 
+			else if(changeValue[0].toUpperCase().equals("AVG") || changeValue[0].toUpperCase().equals("SUM")){
+			//get the beginning cell and ending cell
+			int counter = 0;
+			String beginning = changeValue[1].toUpperCase().substring(0, changeValue[1].indexOf('-'));
+			String ending = changeValue[1].toUpperCase().substring(changeValue[1].indexOf('-') + 1);
+			if(changeValue[0].toUpperCase().equals("AVG")){
+				String placeHolder = beginning;
+				while(!(placeHolder.equals(ending))){
+					SpreadsheetLocation loc = new SpreadsheetLocation(placeHolder);
+					//change the column when its the same row
 						if(placeHolder.substring(1).equals(ending.substring(1))){
-							//changes the letter by one if the rows are the same
-							placeHolder = ((char)(placeHolder.charAt(0) + 1)) + beginning.substring(1);
-							if(wholeSpreadsheet[loc.getRow()][loc.getCol()] instanceof RealCell){
-								//makes sure its a realcell there before adding one to counter
-								counter++;
+						//changes the letter by one if the rows are the same
+						placeHolder = ((char)(placeHolder.charAt(0) + 1)) + beginning.substring(1);
+							if(spreadsheet[loc.getRow()][loc.getCol()] instanceof RealCell){
+							//makes sure its a realcell there before adding one to counter
+							counter++;
 							}
 						}else{
 							//Move to next row if the row isnt equal
 							placeHolder = placeHolder.charAt(0) + "" + (Integer.parseInt(placeHolder.substring(1)) + 1);
-							if(wholeSpreadsheet[loc.getRow()][loc.getCol()] instanceof RealCell){
+							if(spreadsheet[loc.getRow()][loc.getCol()] instanceof RealCell){
 								counter++;
 							}
 						}
 				}
-					//average and sum are basically same method just average divides
-				return (sum(beginning, beginning, ending)) / (counter+1);
+			//average and sum are basically same method just average divides
+			return (sum(beginning, beginning, ending)) / (counter+1);
 			}else if(changeValue[0].toUpperCase().equals("SUM")){
 				return (sum(beginning,beginning,ending));
 			}
@@ -51,8 +53,8 @@ public class FormulaCell extends RealCell{
 			//checks to see if its a cell or number
 			if(changeValue[0].toUpperCase().charAt(0) >= 'A' && changeValue[0].toUpperCase().charAt(0) <='L'){
 				SpreadsheetLocation cell = new SpreadsheetLocation(changeValue[0].toUpperCase());
-				if(wholeSpreadsheet[cell.getRow()][cell.getCol()] instanceof RealCell){
-					sum = ((RealCell)wholeSpreadsheet[cell.getRow()][cell.getCol()]).getDoubleValue();
+				if(spreadsheet[cell.getRow()][cell.getCol()] instanceof RealCell){
+					sum = ((RealCell)spreadsheet[cell.getRow()][cell.getCol()]).getDoubleValue();
 				}
 			}else{
 				sum = Double.parseDouble(changeValue[0]);
@@ -63,13 +65,14 @@ public class FormulaCell extends RealCell{
 				if(changeValue[i + 1].toUpperCase().charAt(0) >= 'A' && changeValue[i + 1].toUpperCase().charAt(0) <='L'){
 						changeValue[i + 1] = changeValue[i + 1].toUpperCase();
 						SpreadsheetLocation loc = new SpreadsheetLocation(changeValue[i + 1]);
-						if(wholeSpreadsheet[loc.getRow()][loc.getCol()] instanceof RealCell){
+						if(spreadsheet[loc.getRow()][loc.getCol()] instanceof RealCell){
 							//casts to RealCell to call doubleValue
-							num = ((RealCell)wholeSpreadsheet[loc.getRow()][loc.getCol()]).getDoubleValue();
+							num = ((RealCell)spreadsheet[loc.getRow()][loc.getCol()]).getDoubleValue();
 						}
 				}else{
 					num = Double.parseDouble(changeValue[i + 1]);
 				}
+				
 				if(changeValue[i].equals("/")){
 					sum /=  num;
 				}else if(changeValue[i].equals("*")){
@@ -102,8 +105,8 @@ public class FormulaCell extends RealCell{
 		SpreadsheetLocation loc = new SpreadsheetLocation(changedCell);
 		//base case
 		if(changedCell.equals(end)){
-			if(wholeSpreadsheet[loc.getRow()][loc.getCol()] instanceof RealCell){
-				return ((RealCell)wholeSpreadsheet[loc.getRow()][loc.getCol()]).getDoubleValue();
+			if(spreadsheet[loc.getRow()][loc.getCol()] instanceof RealCell){
+				return ((RealCell)spreadsheet[loc.getRow()][loc.getCol()]).getDoubleValue();
 			}else{
 				return 0.0;
 			}
@@ -130,8 +133,8 @@ public class FormulaCell extends RealCell{
 		}
 		//gets the value of the cell and keeps it and returns it
 		double first =0.0;
-		if(wholeSpreadsheet[loc.getRow()][loc.getCol()] instanceof RealCell){
-			 first = ((RealCell)wholeSpreadsheet[loc.getRow()][loc.getCol()]).getDoubleValue();
+		if(spreadsheet[loc.getRow()][loc.getCol()] instanceof RealCell){
+			 first = ((RealCell)spreadsheet[loc.getRow()][loc.getCol()]).getDoubleValue();
 			return (first + sum(beginning, changedCell, end));
 		}else{
 			return sum(beginning, changedCell, end);

@@ -1,17 +1,16 @@
    
 package textExcel;
 public class PercentCell extends RealCell{
-	private String value = "";
+	private String input = "";
 	private double percent = 0.0;
-	
 	public PercentCell(String input){
-		this.value = input;
+		this.input = input;
 		//stores value in parent class
 		setRealCell(input);
 	}
 	public double getDoubleValue(){
-		//turn into decimal form
-		percent = Double.parseDouble(value.substring(0, value.length()-1))/100;
+		//put into decimal form
+		percent = Double.parseDouble(input.substring(0, input.length()-1))/100;
 		return percent;
 	}
 }
