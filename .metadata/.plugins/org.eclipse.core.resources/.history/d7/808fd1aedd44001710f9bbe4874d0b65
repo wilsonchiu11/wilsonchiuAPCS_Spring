@@ -25,34 +25,34 @@ public class Spreadsheet implements Grid
 			}
 			
 			//splits by spaces
-			String[] splitInput = command.split(" ",3);
+			String[] split = command.split(" ",3);
 			
 			//changes input to uppercase 
-			splitInput[0] = splitInput[0].toUpperCase();
+			split[0] = split[0].toUpperCase();
 			
 			//checks to see if the input has save in it
-			if(splitInput[0].equals("SAVE")){
-				return saveData(splitInput[1]);
+			if(split[0].equals("SAVE")){
+				return saveData(split[1]);
 			}
 			
 			// checks for an open in the input
-			if(splitInput[0].equals("OPEN")){
-				return openData(splitInput[1]);
+			if(split[0].equals("OPEN")){
+				return openData(split[1]);
 			}
 			
 			//checks if input is a cell  and returns value
-			if(splitInput.length == 3){
-				setCellValue(splitInput[0], splitInput[2]);
+			if(split.length == 3){
+				setCellValue(split[0], split[2]);
 				return getGridText();
 			
 			
 			// checks to see if the first word is an uppercase clear
-			}else if(splitInput[0].contains("CLEAR")){
+			}else if(split[0].contains("CLEAR")){
 				
 				// sends location to clear a specific cell
-				if(splitInput.length == 2){
-					splitInput[1] = splitInput[1].toUpperCase();
-					clearCell(splitInput[1]);
+				if(split.length == 2){
+					split[1] = split[1].toUpperCase();
+					clearCell(split[1]);
 					//returns the grid
 					return getGridText();
 				}else{
@@ -64,7 +64,7 @@ public class Spreadsheet implements Grid
 				
 			}else{
 				//returns the value of a specific cell
-				return cellInspect(splitInput[0]);
+				return inspectCell(split[0]);
 			}	
 				
 		}
@@ -126,7 +126,7 @@ public class Spreadsheet implements Grid
 		return grid;
 	}
 	
-	public String cellInspect(String cellName){
+	public String inspectCell(String cellName){
 		
 		//create an instance of spreadsheetLocation 
 		SpreadsheetLocation loc = new SpreadsheetLocation(cellName);
