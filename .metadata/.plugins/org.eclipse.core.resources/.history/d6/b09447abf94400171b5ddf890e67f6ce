@@ -1,4 +1,4 @@
-//Wilson Chiu APCS2
+
 package textExcel;
 import java.io.FileNotFoundException;
 import java.util.Scanner;

@@ -1,4 +1,4 @@
-//Wilson Chiu APCS2 
+
 	
 package textExcel;
 
@@ -23,24 +23,29 @@ public class Spreadsheet implements Grid
 			if(command.length() == 0 || command.equals("quit")){
 				return "";
 			}
+			
 			//splits by spaces
 			String[] splitInput = command.split(" ",3);
+			
 			//changes input to uppercase 
 			splitInput[0] = splitInput[0].toUpperCase();
+			
 			//checks to see if the input has save in it
 			if(splitInput[0].equals("SAVE")){
 				return saveData(splitInput[1]);
 			}
+			
 			// checks for an open in the input
 			if(splitInput[0].equals("OPEN")){
 				return openData(splitInput[1]);
 			}
-			//checks if input is a cell  and returns value
 			
+			//checks if input is a cell  and returns value
 			if(splitInput.length == 3){
 				setCellValue(splitInput[0], splitInput[2]);
 				return getGridText();
-						
+			
+			
 			// checks to see if the first word is an uppercase clear
 			}else if(splitInput[0].contains("CLEAR")){
 				

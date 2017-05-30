@@ -1,4 +1,4 @@
-//Wilson Chiu APCS2
+
 package textExcel;
 public class ValueCell extends RealCell{
 	private String value = "";

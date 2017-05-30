@@ -1,4 +1,4 @@
-//Wilson Chiu APCS2
+
 package textExcel;
 public class FormulaCell extends RealCell{
 	
@@ -30,20 +30,21 @@ public class FormulaCell extends RealCell{
 					SpreadsheetLocation loc = new SpreadsheetLocation(placeHolder);
 					//change the column when its the same row
 						if(placeHolder.substring(1).equals(ending.substring(1))){
-						//if the rows are the same, change the letters
+						//changes the letter by one if the rows are the same
 						placeHolder = ((char)(placeHolder.charAt(0) + 1)) + beginning.substring(1);
 							if(spreadsheet[loc.getRow()][loc.getCol()] instanceof RealCell){
-							//add one to counter if it is a RealCell
+							//makes sure its a realcell there before adding one to counter
 							counter++;
 							}
 						}else{
-							//if the row isn't equal, move to next row
+							//Move to next row if the row isnt equal
 							placeHolder = placeHolder.charAt(0) + "" + (Integer.parseInt(placeHolder.substring(1)) + 1);
 							if(spreadsheet[loc.getRow()][loc.getCol()] instanceof RealCell){
 								counter++;
 							}
 						}
 				}
+			//average and sum are basically same method just average divides
 			return (sum(beginning, beginning, ending)) / (counter+1);
 			}else if(changeValue[0].toUpperCase().equals("SUM")){
 				return (sum(beginning,beginning,ending));
@@ -59,7 +60,7 @@ public class FormulaCell extends RealCell{
 				sum = Double.parseDouble(changeValue[0]);
 			}
 			for(int i = 1; i < changeValue.length - 1; i += 2 ){
-				//checks for number or cell
+				//checks whether number or a cell
 				double num=0.0;
 				if(changeValue[i + 1].toUpperCase().charAt(0) >= 'A' && changeValue[i + 1].toUpperCase().charAt(0) <='L'){
 						changeValue[i + 1] = changeValue[i + 1].toUpperCase();
@@ -110,7 +111,7 @@ public class FormulaCell extends RealCell{
 				return 0.0;
 			}
 		}
-		//if the columns aren't the same, but the rows are, move horizontally
+		//Case 1: if the columns aren't the same, but the rows are, move horizontally
 		if(Character.toUpperCase(beginning.charAt(0)) != Character.toUpperCase(end.charAt(0)) 
 				&& Integer.parseInt(beginning.substring(1)) == Integer.parseInt(end.substring(1))){
 			changedCell = ((char)(changedCell.charAt(0) + 1)) + beginning.substring(1);

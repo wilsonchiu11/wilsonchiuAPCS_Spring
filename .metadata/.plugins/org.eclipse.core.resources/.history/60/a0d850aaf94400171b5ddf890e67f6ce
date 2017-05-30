@@ -1,4 +1,4 @@
-//Wilson Chiu APCS2
+
 package textExcel;
 public abstract class RealCell implements Cell {
 	private String userInput = "";
@@ -87,7 +87,14 @@ public abstract class RealCell implements Cell {
 		}
 		return placeholder;
 	}
-	
+	/*
+	public String getValue() {
+		return this.userInput;
+	}
+	public void setValue(String text) {
+		this.userInput = text;
+	}
+	*/
 }
 
 

@@ -1,4 +1,3 @@
-//Wilson Chiu APCS2
 package textExcel;
 
 public class EmptyCell implements Cell {
